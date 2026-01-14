@@ -1,0 +1,11 @@
+2025-10-14 09:15:12 auth: Failed password for admin from 192.168.0.10 port 54432 ssh2
+2025-10-14 09:16:03 auth: Failed password for root from 192.168.0.10 port 54433 ssh2
+2025-10-14 09:16:57 auth: Failed password for root from 192.168.0.10 port 54434 ssh2
+2025-10-14 09:17:10 auth: Accepted password for admin from 192.168.0.10 port 54435 ssh2
+2025-10-14 09:18:02 auth: Failed password for user guest from 192.168.1.25 port 52200 ssh2
+2025-10-14 09:18:15 webserver: 500 Internal Server Error for all form 10.0.0.5 port 1024 ssh2 "Mozilla/5.0"
+2025-10-14 09:19:10 api: unauthorized access attempt from 10.0.0.5 port 52213 ssh2
+2025-10-14 09:19:55 auth: Accepted password for root from 10.0.0.5 port 52321 ssh2
+2025-10-14 09:20:30 auth: Failed password for root from 10.0.0.5 port 52345 ssh2
+2025-10-14 09:21:01 auth: Failed password for root from 10.0.0.5 port 52346 ssh2
+2025-10-14 09:21:59 auth: Failed password for root from 10.0.0.5 port 52347 ssh2
