@@ -54,27 +54,32 @@ graph TD
 Flow: Browser/Scripts -> Flask Server -> (UDP) -> Qt/C++ App -> Analysis
 
 
-📂 Project Structure
-Plaintext
+## 📁 Project Structure
+
+```plaintext
 SIEM-Project/
-├── 📁 qss/                   # Stylesheets
+├── qss/                     # Stylesheets
 │   ├── dark.qss
 │   └── light.qss
 │
-├── 📁 cpp/                   # Qt Application Source Code
+├── cpp/                     # Qt Application Source Code
 │   └── (headers, sources, .ui files)
 │
-├── 📁 python/                # Simulation Environment
-│   ├── 📂 web_login_demo/
-│   │   ├── app.py            # Flask Server
+├── python/                  # Simulation Environment
+│   ├── web_login_demo/
+│   │   ├── app.py           # Flask Server
 │   │   └── templates/
-│   └── 📂 traffic_generators/
-│       ├── bruteforce_demo.py
-│       ├── ddos_demo.py
-│       └── correlation_demo.py
+│   │
+│   ├── traffic_generators/
+│   │   ├── bruteforce_demo.py
+│   │   ├── ddos_demo.py
+│   │   └── correlation_demo.py
 │
-└── 📁 assets/
-    └── 📂 screenshots/       # Images for README
+├── assets/
+├── screenshots/             # Images for README
+└── README.md
+```
+
 
 
 🚀 Getting Started
