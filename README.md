@@ -48,7 +48,7 @@ graph TD
   A["Browser / Python Scripts"] -->|"HTTP / Logic"| B["Flask Server"]
   B -->|"UDP Protocol"| C["Qt SIEM Desktop (C++)"]
   C -->|"Parsing & Rendering"| D["UI + Log Analysis"]
-
+```
 
 
 Flow: Browser/Scripts -> Flask Server -> (UDP) -> Qt/C++ App -> Analysis
