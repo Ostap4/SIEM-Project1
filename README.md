@@ -145,6 +145,7 @@ Advanced Qt UI: Combining QSS stylesheets with native C++ painting (resolving co
 Security Simulation: Understanding typical log patterns generated during network attacks.
 
 📈 Future Improvements
+
 [ ] JSON log format support.
 
 [ ] Syslog integration.
