@@ -44,10 +44,11 @@ A suite of tools to simulate real-world network traffic:
 Data flow overview:
 
 ```mermaid
-graph TD;
-    A[Browser / Python Scripts] -->|HTTP / Logic| B(Flask Server);
-    B -->|UDP Protocol| C{Qt/C++ SIEM Desktop};
-    C -->|Parsing & Rendering| D[UI + Log Analysis];
+graph TD
+  A["Browser / Python Scripts"] -->|"HTTP / Logic"| B["Flask Server"]
+  B -->|"UDP Protocol"| C["Qt SIEM Desktop (C++)"]
+  C -->|"Parsing & Rendering"| D["UI + Log Analysis"]
+
 
 
 Flow: Browser/Scripts -> Flask Server -> (UDP) -> Qt/C++ App -> Analysis
