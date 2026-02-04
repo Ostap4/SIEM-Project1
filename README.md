@@ -50,7 +50,6 @@ graph TD
   C -->|"Parsing & Rendering"| D["UI + Log Analysis"]
 ```
 
-
 Flow: Browser/Scripts -> Flask Server -> (UDP) -> Qt/C++ App -> Analysis
 
 
