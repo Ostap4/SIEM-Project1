@@ -57,25 +57,27 @@ Flow: Browser/Scripts -> Flask Server -> (UDP) -> Qt/C++ App -> Analysis
 
 ```plaintext
 SIEM-Project/
-├── qss/                     # Stylesheets
+├── assets/
+│   └── screenshots/              # Images for README
+│
+├── qss/                          # Stylesheets
 │   ├── dark.qss
 │   └── light.qss
 │
-├── cpp/                     # Qt Application Source Code
-│   └── (headers, sources, .ui files)
+├── sample_data/                  # Sample log data for testing
 │
-├── python/                  # Simulation Environment
-│   ├── web_login_demo/
-│   │   ├── app.py           # Flask Server
-│   │   └── templates/
-│   │
-│   ├── traffic_generators/
-│   │   ├── bruteforce_demo.py
-│   │   ├── ddos_demo.py
-│   │   └── correlation_demo.py
+├── tools/                        # Simulation Environment
+│   └── programs_for_testing_C++/ # Python scripts (Flask & Generators)
 │
-├── assets/
-├── screenshots/             # Images for README
+├── [Root Directory]              # Qt C++ Application Source Code
+│   ├── main.cpp
+│   ├── hellogui.cpp / .h / .ui
+│   ├── udplistener.cpp / .h
+│   ├── Analyze.cpp / .h
+│   ├── AlertEngine.cpp / .h
+│   └── ... (other source files)
+│
+├── LICENSE
 └── README.md
 ```
 
