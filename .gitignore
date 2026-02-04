@@ -1,0 +1,49 @@
+# =====================
+# BUILD
+# =====================
+build/
+Build/
+Debug/
+Release/
+x64/
+x86/
+
+# =====================
+# Visual Studio
+# =====================
+*.user
+*.suo
+*.pdb
+*.ilk
+*.obj
+*.tlog
+*.idb
+*.ipch
+.vs/
+
+# =====================
+# Qt / CMake
+# =====================
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.pro.user
+*.qmake.stash
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+
+# =====================
+# Python
+# =====================
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# =====================
+# OS
+# =====================
+.DS_Store
+Thumbs.db
