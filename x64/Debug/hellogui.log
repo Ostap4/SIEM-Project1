@@ -1,37 +1,4 @@
 ﻿   Qt/MSBuild: 3.4.1.0
    Qt: 6.5.3
-  hellogui.cpp
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0xf8 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0xfb that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0xfe that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0x101 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0x104 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0x107 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0x10a that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0x10d that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0x110 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0x113 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
-C:\Users\Ostap\source\repos\hellogui\hellogui\Analyze.h(1,1): warning C4828: The file contains a character starting at offset 0x116 that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'hellogui.cpp')
-  
+  udplistener.cpp
   hellogui.vcxproj -> C:\Users\Ostap\source\repos\hellogui\x64\Debug\hellogui.exe

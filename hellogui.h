@@ -32,6 +32,7 @@ private slots:
     void onUdpLogReceived(QString message, QString senderIp);
     void on_LiveMode_clicked();
     void showAlertNonBlocking(QMessageBox::Icon icon, const QString& title, const QString& text);
+    void on_changeTheme_clicked();
 
     
     
@@ -48,6 +49,9 @@ private:
 
     AlertEngine securityEngine;
     void processSecurityRules(QString ip, QString eventType, QString result);
+    void applyTheme(const QString& path);
+    void toggleTheme();
+    bool darkMode;
    
 
    

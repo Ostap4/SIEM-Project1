@@ -85,17 +85,17 @@ void RiskScoreDialog::loadRiskScore()
         // 0. Source IP
         ui->tableWidget->setItem(row, 0, new QTableWidgetItem(ip));
 
-        // 1. Risk Score (Jako liczba)
+        // 1. Risk Score
         QTableWidgetItem* riskItem = new QTableWidgetItem();
         riskItem->setData(Qt::EditRole, risk);
         ui->tableWidget->setItem(row, 1, riskItem);
 
-        // 2. Failed 1 min (Jako liczba)
+        // 2. Failed 1 min 
         QTableWidgetItem* failItem = new QTableWidgetItem();
         failItem->setData(Qt::EditRole, failsRecent);
         ui->tableWidget->setItem(row, 2, failItem);
 
-        // 3. Total Fails (Jako liczba)
+        // 3. Total Fails 
         QTableWidgetItem* totalItem = new QTableWidgetItem();
         totalItem->setData(Qt::EditRole, failsTotal);
         ui->tableWidget->setItem(row, 3, totalItem);

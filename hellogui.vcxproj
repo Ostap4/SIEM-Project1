@@ -133,6 +133,10 @@
     <ClInclude Include="TimeLine.h" />
     <QtMoc Include="RiskScoreDialog.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dark.qss" />
+    <None Include="light.qss" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />

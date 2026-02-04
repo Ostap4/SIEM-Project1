@@ -37,6 +37,13 @@ hellogui::hellogui(QWidget* parent)
 {
     ui.setupUi(this);
     setWindowTitle("SIEM Project");
+ 
+
+    darkMode = true;
+    applyTheme("dark.qss"); 
+    ui.changeTheme->setText("☀ Light Mode");
+
+
     QSqlDatabase db = QSqlDatabase::database();
     if (!db.isValid())
         db = QSqlDatabase::addDatabase("QSQLITE");
@@ -130,7 +137,7 @@ void hellogui::refresh_Table() {
 
     ui.tableWidget->setRowCount(0);
 
-    
+
     QSqlQuery query("SELECT id, timestamp, source_ip, event_type, severity, message, username, hash_password "
         "FROM logs ORDER BY timestamp ASC");
 
@@ -149,13 +156,13 @@ void hellogui::refresh_Table() {
         timeItem->setData(Qt::EditRole, dt);
         timeItem->setText(dt.toString("yyyy-MM-dd HH:mm:ss"));
 
-       
+
         int id = query.value("id").toInt();
         timeItem->setData(Qt::UserRole, id);
 
         ui.tableWidget->setItem(row, 0, timeItem);
 
-        
+
         ui.tableWidget->setItem(row, 1, new QTableWidgetItem(query.value("source_ip").toString()));
         ui.tableWidget->setItem(row, 2, new QTableWidgetItem(query.value("event_type").toString()));
         ui.tableWidget->setItem(row, 3, new QTableWidgetItem(query.value("severity").toString()));
@@ -163,21 +170,33 @@ void hellogui::refresh_Table() {
         ui.tableWidget->setItem(row, 5, new QTableWidgetItem(query.value("username").toString()));
         ui.tableWidget->setItem(row, 6, new QTableWidgetItem(query.value("hash_password").toString()));
 
+
+        QString sev = query.value("severity").toString().trimmed().toLower();
+        QColor bgColor;
+        QColor textColor;
+
+
+        if (darkMode) {
+            if (sev == "critical") { bgColor = QColor("#ef4444"); textColor = Qt::white; }
+            else if (sev == "high") { bgColor = QColor("#f59e0b"); textColor = Qt::white; }
+            else if (sev == "medium") { bgColor = QColor("#fde047"); textColor = QColor("#111827"); }
+            else { bgColor = QColor("#9ca3af"); textColor = QColor("#111827"); }
+        }
+        else {
+            if (sev == "critical") { bgColor = QColor("#fecaca"); textColor = QColor("#111827"); }
+            else if (sev == "high") { bgColor = QColor("#fed7aa"); textColor = QColor("#111827"); }
+            else if (sev == "medium") { bgColor = QColor("#fef9c3"); textColor = QColor("#111827"); }
+            else { bgColor = QColor("#f3f4f6"); textColor = QColor("#111827"); } 
+        }
+
+        QTableWidgetItem* severityItem = ui.tableWidget->item(row, 3);
+        severityItem->setData(Qt::BackgroundRole, bgColor);
+        severityItem->setData(Qt::ForegroundRole, textColor);
+        severityItem->setTextAlignment(Qt::AlignCenter);
         
-        QString sev = query.value("severity").toString().toLower();
-        QColor color = Qt::white; 
 
-        if (sev == "critical") color = Qt::red;
-        else if (sev == "high") color = QColor(255, 165, 0);
-        else if (sev == "medium") color = Qt::yellow;
-        else if (sev == "info") color = Qt::lightGray;
-
-        ui.tableWidget->item(row, 3)->setBackground(color);
-
-        row++;
     }
     ui.tableWidget->viewport()->update();
-
 }
 
 
@@ -243,7 +262,7 @@ void hellogui::on_Analyze_clicked(){
     QSqlDatabase db = QSqlDatabase::database();
 
     if (!db.isOpen()) {
-        QMessageBox::warning(this, "Błąd", "Baza danych nie jest połączona!");
+        QMessageBox::warning(this, "Error", "The database is not connected!");
         return;
     }
 
@@ -295,13 +314,13 @@ void hellogui::on_Analyze_clicked(){
     }
 
     if (db.commit()) {
-        QMessageBox::information(this, "Sukces", QString("Przeanalizowano i zaktualizowano %1 logów.").arg(updatedCount));
+        QMessageBox::information(this, "Success", QString("%1 logs analyzed and updated.").arg(updatedCount));
         
         refresh_Table();
     }
     else {
         db.rollback();
-        QMessageBox::critical(this, "Błąd", "Nie udało się zapisać zmian w bazie.");
+        QMessageBox::critical(this, "Error", "Unable to save changes to the database.");
     }
 }
    
@@ -468,10 +487,10 @@ void hellogui::on_ApplySort_clicked()
     }
 
     
-    // Budowa SQL
+   
    
     QString sql;
-
+    
     if (!groupedMode) {
         sql =
             "SELECT timestamp, source_ip, event_type, severity, message, username, hash_password "
@@ -480,6 +499,7 @@ void hellogui::on_ApplySort_clicked()
             sql += "WHERE " + where.join(" AND ") + " ";
         sql += "ORDER BY timestamp DESC";
     }
+    
     else {
         QString col;
         if (groupBy == "Event type")  col = "event_type";
@@ -496,8 +516,6 @@ void hellogui::on_ApplySort_clicked()
     }
 
    
-    // Wykonanie SQL
-   
     QSqlQuery query(db);
     query.prepare(sql);
     for (const QVariant& v : binds)
@@ -510,7 +528,7 @@ void hellogui::on_ApplySort_clicked()
     }
 
     
-    // Reset tabeli
+   
 
     if (!groupedMode) {
         ui.tableWidget->setColumnCount(7);
@@ -534,7 +552,7 @@ void hellogui::on_ApplySort_clicked()
     }
 
    
-    // Wypelnianie tabeli
+  
  
     int row = 0;
 
@@ -555,7 +573,7 @@ void hellogui::on_ApplySort_clicked()
                 ui.tableWidget->item(row, 3)->setBackground(Qt::red);
             else if (sev == "high")
                 ui.tableWidget->item(row, 3)->setBackground(QColor(255, 165, 0));
-            else if (sev == "medium")
+            else if (sev == "medium") 
                 ui.tableWidget->item(row, 3)->setBackground(Qt::yellow);
             else
                 ui.tableWidget->item(row, 3)->setBackground(Qt::lightGray);
@@ -586,29 +604,40 @@ void hellogui::on_RiskScoreDialog_clicked() {
 
 void hellogui::table_layuot()
 {
+   
     ui.tableWidget->clear();
     ui.tableWidget->setRowCount(0);
     ui.tableWidget->setColumnCount(7);
 
     ui.tableWidget->setHorizontalHeaderLabels({
         "Timestamp", "Source IP", "Event Type",
-        "Severity", "Message", "Username", "Hash password"
+        "Severity", "Message", "Username", "Password" 
         });
 
+    ui.tableWidget->setAlternatingRowColors(false);
+    ui.tableWidget->verticalHeader()->setVisible(false);
+    ui.tableWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     
-    ui.tableWidget->verticalHeader()->setVisible(true);
-    ui.tableWidget->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
 
-    QHeaderView* h = ui.tableWidget->horizontalHeader();
-    h->setSectionResizeMode(QHeaderView::Interactive);
+    QHeaderView* header = ui.tableWidget->horizontalHeader();
 
-    ui.tableWidget->setColumnWidth(0, 160); // Timestamp
-    ui.tableWidget->setColumnWidth(1, 110);
-    ui.tableWidget->setColumnWidth(2, 130);
-    ui.tableWidget->setColumnWidth(3, 90);
-    ui.tableWidget->setColumnWidth(4, 420); // Message
+   
+    header->setSectionResizeMode(QHeaderView::Interactive);
+
+   
+    ui.tableWidget->setColumnWidth(0, 160);
+    ui.tableWidget->setColumnWidth(1, 120);
+    ui.tableWidget->setColumnWidth(2, 100);
+    ui.tableWidget->setColumnWidth(3, 80);
+    ui.tableWidget->setColumnWidth(4, 450);
     ui.tableWidget->setColumnWidth(5, 120);
-    ui.tableWidget->setColumnWidth(6, 150);
+
+   
+    header->setSectionResizeMode(6, QHeaderView::Stretch);
+
+   
+    header->setStretchLastSection(false);
 }
 
 void hellogui::on_Correlation_Analyze_clicked()
@@ -741,7 +770,7 @@ void hellogui::on_Load_Data_Base_clicked() {
 /*
 -----------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------
----------------------------------------------------- TRYB LIVE --------------------------------------------------------
+----------------------------------------------------LIVE MODE--------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------
 */
@@ -755,6 +784,11 @@ void hellogui::showAlertNonBlocking(QMessageBox::Icon icon,
     auto* box = new QMessageBox(icon, title, text, QMessageBox::Ok, this);
     box->setAttribute(Qt::WA_DeleteOnClose);
     box->open();
+}
+
+void hellogui::on_changeTheme_clicked()
+{
+    toggleTheme();
 }
 
 
@@ -806,9 +840,6 @@ void hellogui::processSecurityRules(QString ip, QString eventType, QString resul
         }
     }
 }
-
-
-
 
 
 
@@ -878,9 +909,30 @@ void hellogui::addLog(
     ui.tableWidget->setItem(row, 5, new QTableWidgetItem(username));
     ui.tableWidget->setItem(row, 6, new QTableWidgetItem(hash_password));
 
+    QTableWidgetItem* sevItem = new QTableWidgetItem(severity);
+    ui.tableWidget->setItem(row, 3, sevItem);
+
+    QString s = severity.toLower();
+    QColor bgColor;
+    QColor textColor;
+
+    if (darkMode) {
+        // DARK MODE
+        if (s == "critical") { bgColor = Qt::red; textColor = Qt::white; }
+        else if (s == "medium") { bgColor = Qt::yellow; textColor = Qt::black; }
+        else { bgColor = Qt::lightGray; textColor = Qt::black; }
+    }
+    else {
+        // LIGHT MODE
+        if (s == "critical") { bgColor = QColor(255, 200, 200); textColor = Qt::black; }
+        else if (s == "medium") { bgColor = QColor(255, 255, 200); textColor = Qt::black; }
+        else { bgColor = Qt::white; textColor = Qt::black; }
+    }
+
+    sevItem->setBackground(bgColor);
+    sevItem->setForeground(textColor);
     
-    QSqlDatabase::database().commit();
-    refresh_Table();
+ 
     
 
 }
@@ -916,11 +968,11 @@ void hellogui::onUdpLogReceived(QString message, QString senderIp)
     }
 
    
-    QString ipFromLog = parts[0];   // IP z tresci loga
-    QString eventType = parts[1];   // LOGIN
-    QString result = parts[2].trimmed();   // SUCCESS / FAILURE
-    QString username = parts[3];   // User
-    QString hash = parts[4];   // Hash
+    QString ipFromLog = parts[0];   
+    QString eventType = parts[1];   
+    QString result = parts[2].trimmed();   
+    QString username = parts[3];  
+    QString hash = parts[4];   
 
 
     processSecurityRules(ipFromLog, eventType, result);
@@ -948,6 +1000,48 @@ void hellogui::on_LiveMode_clicked() {
 
     }
 
+}
+
+void hellogui::applyTheme(const QString& path)
+{
+    QFile file(path);
+    qDebug() << "Trying to load theme from:" << path;
+    qDebug() << "Exists?" << file.exists();
+
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        qDebug() << "FAILED to open:" << file.errorString();
+        return;
+    }
+
+    QTextStream stream(&file);
+    const QString qss = stream.readAll();
+    qDebug() << "Loaded QSS size:" << qss.size();
+
+    qApp->setStyleSheet(qss);
+    qDebug() << "Theme applied.";
+}
+
+void hellogui::toggleTheme()
+{
+    qDebug() << "Stary stan darkMode:" << darkMode;
+    darkMode = !darkMode; 
+    qDebug() << "Nowy stan darkMode:" << darkMode;
+
+    if (darkMode) {
+        
+        applyTheme("dark.qss");
+        ui.changeTheme->setText("☀ Light Mode");
+        ui.statusBar->showMessage("Switched to Dark Mode", 2000);
+    }
+    else {
+       
+        applyTheme("light.qss");
+        ui.changeTheme->setText("🌙 Dark Mode");
+        ui.statusBar->showMessage("Switched to Light Mode", 2000);
+    }
+
+    
+    refresh_Table();
 }
 
 

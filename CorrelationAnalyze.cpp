@@ -18,7 +18,7 @@ CorrelationAnalyzeDialog::CorrelationAnalyzeDialog(QWidget* parent)
     , ui(new Ui::CorrelationAnalyzeDialog)
 {
     if (!QSqlDatabase::database().isOpen()) {
-        QMessageBox::critical(this, "Błąd", "Brak połączenia z bazą danych!\nUpewnij się, że główne okno nawiązało połączenie.");
+        QMessageBox::critical(this, "Error", "No connection to the database!\nMake sure that the main window has established a connection.");
     }
 
     ui->setupUi(this);

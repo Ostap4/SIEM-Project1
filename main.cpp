@@ -8,8 +8,9 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QThread>
+#include <QtCore/QResource>
 
-
+//Q_INIT_RESOURCE(hellogui);
 
 
 int main(int argc, char* argv[])

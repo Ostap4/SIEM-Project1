@@ -67,11 +67,12 @@ static constexpr auto qt_meta_stringdata_CLASShelloguiENDCLASS = QtMocHelpers::s
     "QMessageBox::Icon",
     "icon",
     "title",
-    "text"
+    "text",
+    "on_changeTheme_clicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASShelloguiENDCLASS_t {
-    uint offsetsAndSizes[58];
+    uint offsetsAndSizes[60];
     char stringdata0[9];
     char stringdata1[19];
     char stringdata2[1];
@@ -101,6 +102,7 @@ struct qt_meta_stringdata_CLASShelloguiENDCLASS_t {
     char stringdata26[5];
     char stringdata27[6];
     char stringdata28[5];
+    char stringdata29[23];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASShelloguiENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -134,7 +136,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASShelloguiENDCLASS_t qt_meta_stri
         QT_MOC_LITERAL(372, 17),  // "QMessageBox::Icon"
         QT_MOC_LITERAL(390, 4),  // "icon"
         QT_MOC_LITERAL(395, 5),  // "title"
-        QT_MOC_LITERAL(401, 4)   // "text"
+        QT_MOC_LITERAL(401, 4),  // "text"
+        QT_MOC_LITERAL(406, 22)   // "on_changeTheme_clicked"
     },
     "hellogui",
     "on_OpenLog_clicked",
@@ -164,7 +167,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASShelloguiENDCLASS_t qt_meta_stri
     "QMessageBox::Icon",
     "icon",
     "title",
-    "text"
+    "text",
+    "on_changeTheme_clicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -176,7 +180,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASShelloguiENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -184,21 +188,22 @@ Q_CONSTINIT static const uint qt_meta_data_CLASShelloguiENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  104,    2, 0x08,    1 /* Private */,
-       3,    0,  105,    2, 0x08,    2 /* Private */,
-       4,    0,  106,    2, 0x08,    3 /* Private */,
-       5,    0,  107,    2, 0x08,    4 /* Private */,
-       6,    0,  108,    2, 0x08,    5 /* Private */,
-       7,    0,  109,    2, 0x08,    6 /* Private */,
-       8,    0,  110,    2, 0x08,    7 /* Private */,
-       9,    0,  111,    2, 0x08,    8 /* Private */,
-      10,    0,  112,    2, 0x08,    9 /* Private */,
-      11,    6,  113,    2, 0x08,   10 /* Private */,
-      18,    0,  126,    2, 0x08,   17 /* Private */,
-      19,    0,  127,    2, 0x08,   18 /* Private */,
-      20,    2,  128,    2, 0x08,   19 /* Private */,
-      23,    0,  133,    2, 0x08,   22 /* Private */,
-      24,    3,  134,    2, 0x08,   23 /* Private */,
+       1,    0,  110,    2, 0x08,    1 /* Private */,
+       3,    0,  111,    2, 0x08,    2 /* Private */,
+       4,    0,  112,    2, 0x08,    3 /* Private */,
+       5,    0,  113,    2, 0x08,    4 /* Private */,
+       6,    0,  114,    2, 0x08,    5 /* Private */,
+       7,    0,  115,    2, 0x08,    6 /* Private */,
+       8,    0,  116,    2, 0x08,    7 /* Private */,
+       9,    0,  117,    2, 0x08,    8 /* Private */,
+      10,    0,  118,    2, 0x08,    9 /* Private */,
+      11,    6,  119,    2, 0x08,   10 /* Private */,
+      18,    0,  132,    2, 0x08,   17 /* Private */,
+      19,    0,  133,    2, 0x08,   18 /* Private */,
+      20,    2,  134,    2, 0x08,   19 /* Private */,
+      23,    0,  139,    2, 0x08,   22 /* Private */,
+      24,    3,  140,    2, 0x08,   23 /* Private */,
+      29,    0,  147,    2, 0x08,   27 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -216,6 +221,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASShelloguiENDCLASS[] = {
     QMetaType::Void, QMetaType::QString, QMetaType::QString,   21,   22,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 25, QMetaType::QString, QMetaType::QString,   26,   27,   28,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -269,7 +275,9 @@ Q_CONSTINIT const QMetaObject hellogui::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QMessageBox::Icon, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'on_changeTheme_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -295,6 +303,7 @@ void hellogui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 12: _t->onUdpLogReceived((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
         case 13: _t->on_LiveMode_clicked(); break;
         case 14: _t->showAlertNonBlocking((*reinterpret_cast< std::add_pointer_t<QMessageBox::Icon>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
+        case 15: _t->on_changeTheme_clicked(); break;
         default: ;
         }
     }
@@ -319,13 +328,13 @@ int hellogui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 16;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 16)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 15;
+        _id -= 16;
     }
     return _id;
 }

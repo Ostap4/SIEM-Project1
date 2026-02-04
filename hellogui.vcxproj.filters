@@ -92,4 +92,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dark.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="light.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
