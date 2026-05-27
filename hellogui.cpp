@@ -28,6 +28,7 @@
 #include <QUdpSocket>
 #include <QHostAddress>
 #include <AlertEngine.h>
+#include "ReportGenerator.h"
 
 //#include <TimeLine.h>
 
@@ -331,114 +332,27 @@ void hellogui::on_Clear_clicked() {
 
 void hellogui::on_Export_clicked()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, "Export PDF", "", "PDF Files (*.pdf)");
+    QString fileName = QFileDialog::getSaveFileName(
+        this,
+        "Export SIEM Report",
+        "",
+        "PDF Files (*.pdf)"
+    );
+
     if (fileName.isEmpty())
         return;
+
     if (!fileName.endsWith(".pdf", Qt::CaseInsensitive))
         fileName += ".pdf";
 
-    
-    QVector<int> visibleCols;
-    int severityCol = -1;
+    bool ok = ReportGenerator::exportDashboardReport(ui.tableWidget, fileName);
 
-    for (int col = 0; col < ui.tableWidget->columnCount(); ++col) {
-        if (ui.tableWidget->isColumnHidden(col))
-            continue;
-
-        visibleCols.push_back(col);
-
-        auto* hdr = ui.tableWidget->horizontalHeaderItem(col);
-        if (hdr) {
-            const QString headerText = hdr->text().trimmed();
-            
-            if (headerText.contains("Severity", Qt::CaseInsensitive)) {
-                severityCol = col;
-            }
-        }
+    if (ok) {
+        QMessageBox::information(this, "Export PDF", "SIEM analytical report exported successfully.");
     }
-
-    
-    if (visibleCols.isEmpty()) {
-        QMessageBox::information(this, "Export PDF", "No visible columns to export.");
-        return;
+    else {
+        QMessageBox::critical(this, "Export PDF", "Failed to export SIEM analytical report.");
     }
-
-    QTextDocument doc;
-    QString html;
-
-    html += R"(
-        <html>
-        <head>
-            <meta charset="utf-8">
-            <style>
-                body { font-family: Arial, sans-serif; font-size: 10pt; }
-                h2 { margin-bottom: 10px; }
-                table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-                th, td { border: 1px solid #444; padding: 4px; vertical-align: top; word-wrap: break-word; }
-                th { background: #ddd; }
-            </style>
-        </head>
-        <body>
-    )";
-
-    html += "<h2>Log Analysis Export</h2>";
-    html += "<table><tr>";
-
-    
-    for (int idx = 0; idx < visibleCols.size(); ++idx) {
-        int col = visibleCols[idx];
-        QTableWidgetItem* hdr = ui.tableWidget->horizontalHeaderItem(col);
-        QString headerText = hdr ? hdr->text() : QString("Column %1").arg(col);
-        html += QString("<th>%1</th>").arg(headerText.toHtmlEscaped());
-    }
-    html += "</tr>";
-
-    
-    for (int row = 0; row < ui.tableWidget->rowCount(); ++row) {
-        html += "<tr>";
-
-        for (int idx = 0; idx < visibleCols.size(); ++idx) {
-            int col = visibleCols[idx];
-
-            QTableWidgetItem* item = ui.tableWidget->item(row, col);
-            QString text = item ? item->text() : "";
-
-            bool hasDistinctBackground = false;
-            if (item && item->background().style() != Qt::NoBrush) {
-                hasDistinctBackground = true;
-            }
-
-            if (col == severityCol && item && hasDistinctBackground) {
-                QColor bgColor = item->background().color();
-                QColor textColor = item->foreground().color();
-
-                
-                if (!textColor.isValid()) textColor = Qt::black;
-
-                html += QString("<td style='background-color:%1; color:%2;'>%3</td>")
-                    .arg(bgColor.name(), textColor.name(), text.toHtmlEscaped());
-            }
-            else {
-               
-                html += QString("<td>%1</td>").arg(text.toHtmlEscaped());
-            }
-        }
-
-        html += "</tr>";
-    }
-
-    html += "</table></body></html>";
-
-    doc.setHtml(html);
-
-    QPrinter printer(QPrinter::HighResolution);
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName(fileName);
-
-    
-    printer.setPageOrientation(QPageLayout::Landscape);
-
-    doc.print(&printer);
 }
 
 

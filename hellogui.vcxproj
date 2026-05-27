@@ -36,11 +36,11 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtModules>gui;network;widgets;sql;charts</QtModules>
+    <QtModules>gui;network;widgets;printsupport;sql;charts</QtModules>
     <QtInstall>Qt 6.5.3 MSCV2019</QtInstall>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtModules>gui;network;widgets;sql;charts</QtModules>
+    <QtModules>gui;network;widgets;printsupport;sql;charts</QtModules>
     <QtInstall>Qt 6.5.3 MSCV2019</QtInstall>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -64,7 +64,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\Qt\6.5.3\msvc2019_64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>D:\Qt\6.5.3\msvc2019_64\lib</AdditionalLibraryDirectories>
@@ -74,7 +74,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\Qt\6.5.3\msvc2019_64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>D:\Qt\6.5.3\msvc2019_64\lib</AdditionalLibraryDirectories>
@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClCompile Include="AlertEngine.cpp" />
     <ClCompile Include="CorrelationAnalyze.cpp" />
+    <ClCompile Include="ReportGenerator.cpp" />
     <ClCompile Include="RiskScoreDialog.cpp" />
     <ClCompile Include="TimeLine.cpp" />
     <ClCompile Include="udplistener.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="Analyze.h" />
     <QtMoc Include="udplistener.h" />
     <QtMoc Include="CorrelationAnalyze.h" />
+    <ClInclude Include="ReportGenerator.h" />
     <ClInclude Include="TimeLine.h" />
     <QtMoc Include="RiskScoreDialog.h" />
   </ItemGroup>
